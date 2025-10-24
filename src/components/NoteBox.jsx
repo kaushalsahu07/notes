@@ -1,7 +1,7 @@
 import { IconTrashX, IconCalendarEvent } from "@tabler/icons-react";
 import "../App.css";
 
-export default function NoteBox({ id, title, content, onChange, onCreate }) {
+export default function NoteBox({ id, title, content, onChange, onCreate, onDelete }) {
  
 
   return (
@@ -27,8 +27,9 @@ export default function NoteBox({ id, title, content, onChange, onCreate }) {
             <IconCalendarEvent stroke={2} className="w-5 text-blue-500" />
             {onCreate}
           </p>
-          <button className="text-red-500 hover:text-red-700 text-sm">
+          <button onClick={() => onDelete(id)} className="text-red-500 hover:text-red-700 text-sm">
             <IconTrashX stroke={2} className="w-5" />
+            
           </button>
         </div>
       </div>

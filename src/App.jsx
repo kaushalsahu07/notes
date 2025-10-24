@@ -30,13 +30,17 @@ function App() {
     );
   };
 
+ const deleteNote = (id) => {
+    setNotes([...notes].filter(note => note.id !== id));
+  }
+
   return (
     <>
       {/* Nav */}
       <Nav onClick={addNotes} />
       {/* Notes - responsive grid: 1 column on xs, 2 on sm, 3 on md, 4 on lg+ */}
       <div className="px-4 py-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {notes.map((note) => (
+        {[...notes].reverse().map((note) => (
           <NoteBox
             key={note.id}
             id={note.id}
@@ -44,6 +48,7 @@ function App() {
             content={note.content}
             onChange={lastNotes}
             onCreate={note.onCreate}
+            onDelete={deleteNote}
           />
         ))}
       </div>
