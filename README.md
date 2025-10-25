@@ -62,7 +62,7 @@ Created with ❤️ by Kaushal Sahu
 
 ---
 
-## Contact
+## 🧷 Contact
 
 For any inquiries, reach out at [kaushalsahu.me@gmailcom](mailto:kaushalsahu.me@gmailcom).<br>
 GitHub: [@kaushalsahu07](https://github.com/kaushalsahu07).<br>
