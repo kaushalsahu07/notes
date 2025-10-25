@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav.jsx";
 import NoteBox from "./components/NoteBox.jsx";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(() => {
+    const saveNotes = localStorage.getItem("notes")
+    return saveNotes ? JSON.parse(saveNotes) : []
+  });
 
+  // Storage All the Notes in LocalStorage
+  useEffect(() => {
+    localStorage.setItem("notes" ,  JSON.stringify(notes))
+  }, [notes])
+
+  // Date Function
   const today = new Date().toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric"
   });
 
+  // Add notes function when the plus button is clicked
   const addNotes = () => {
     const newNote = {
       id: Date.now(),
@@ -22,6 +32,7 @@ function App() {
     setNotes([...notes, newNote]);
   };
 
+  // For Updating Notes Function
   const lastNotes = (id, flied, value) => {
     setNotes((preNotes) =>
       preNotes.map((note) =>
@@ -30,6 +41,7 @@ function App() {
     );
   };
 
+ // Delete Notes Funtion
  const deleteNote = (id) => {
     setNotes([...notes].filter(note => note.id !== id));
   }
