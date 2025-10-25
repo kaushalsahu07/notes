@@ -29,7 +29,6 @@ export default function NoteBox({ id, title, content, onChange, onCreate, onDele
           </p>
           <button onClick={() => onDelete(id)} className="text-red-500 hover:text-red-700 text-sm">
             <IconTrashX stroke={2} className="w-5" />
-            
           </button>
         </div>
       </div>
