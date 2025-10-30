@@ -2,23 +2,24 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav.jsx";
 import NoteBox from "./components/NoteBox.jsx";
+import { GoogleGenAI } from "@google/genai";
 
 function App() {
   const [notes, setNotes] = useState(() => {
-    const saveNotes = localStorage.getItem("notes")
-    return saveNotes ? JSON.parse(saveNotes) : []
+    const saveNotes = localStorage.getItem("notes");
+    return saveNotes ? JSON.parse(saveNotes) : [];
   });
 
   // Storage All the Notes in LocalStorage
   useEffect(() => {
-    localStorage.setItem("notes" ,  JSON.stringify(notes))
-  }, [notes])
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   // Date Function
   const today = new Date().toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric"
+    year: "numeric",
   });
 
   // Add notes function when the plus button is clicked
@@ -41,10 +42,21 @@ function App() {
     );
   };
 
- // Delete Notes Funtion
- const deleteNote = (id) => {
-    setNotes([...notes].filter(note => note.id !== id));
-  }
+  // Delete Notes Funtion
+  const deleteNote = (id) => {
+    setNotes([...notes].filter((note) => note.id !== id));
+  };
+
+  //Ai
+  // const ai = new GoogleGenAI({});
+
+  // async function generateAIContent() {
+  //  const response = await ai.models.generateContent({
+  //     model: "gemini-2.5-flash",
+  //     contents: "Explain how AI works in a few words",
+  //   });
+  //   console.log(response.text);
+  //   }
 
   return (
     <>
@@ -61,6 +73,7 @@ function App() {
             onChange={lastNotes}
             onCreate={note.onCreate}
             onDelete={deleteNote}
+            // onAi={generateAIContent}
           />
         ))}
       </div>

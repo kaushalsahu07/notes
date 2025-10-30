@@ -1,5 +1,5 @@
 {
-  "homepage" : "https://kaushalsahu07.github.io/notes/",
+  "homepage": "https://kaushalsahu07.github.io/notes/",
   "name": "notes",
   "private": true,
   "version": "0.0.0",
@@ -13,6 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@google/genai": "^1.28.0",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.15",
     "react": "^19.1.1",
