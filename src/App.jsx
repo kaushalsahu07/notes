@@ -48,16 +48,47 @@ function App() {
   };
 
   //Ai
-  // const ai = new GoogleGenAI({});
+  async function generateAIContent(id, option) {
+    // Get API Key from .env file
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error(
+        "API Key is missing! Make sure .env file is in the root directory and server is restarted."
+      );
+    }
 
-  // async function generateAIContent() {
-  //  const response = await ai.models.generateContent({
-  //     model: "gemini-2.5-flash",
-  //     contents: "Explain how AI works in a few words",
-  //   });
-  //   console.log(response.text);
-  //   }
+    try {
+      const note = notes.find((note) => note.id === id);
+      if (!note) {
+        return;
+      }
 
+      // Create the prompt based on the selected option
+      let prompt = "";
+      if (option === "summary") {
+        prompt = `Summarize the following note content in a concise manner:\n\n${note.content}`;
+      } else if (option === "expand") {
+        prompt = `Expand upon the following note content, adding more details and depth:\n\n${note.content}`;
+      }
+
+      const ai = new GoogleGenAI({ apiKey });
+      
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      });
+
+      // Update the note with AI response
+      lastNotes(id, "content", response.text);
+    } catch (error) {
+      console.error("Error generating AI content:", error);
+    }
+  }
   return (
     <>
       {/* Nav */}
@@ -73,7 +104,7 @@ function App() {
             onChange={lastNotes}
             onCreate={note.onCreate}
             onDelete={deleteNote}
-            // onAi={generateAIContent}
+            onAi={generateAIContent}
           />
         ))}
       </div>
