@@ -1,6 +1,6 @@
 # 📝 Notes App
 
-A simple and lightweight **React.js Notes App** that lets you create, view, edit, and delete notes — built for learning and fun!
+A simple and lightweight **AI React.js Notes App** that lets you create, view, edit, and delete notes — built for learning and fun!
 
 ---
 
@@ -11,6 +11,7 @@ A simple and lightweight **React.js Notes App** that lets you create, view, edit
 - 📅 Each note shows the date it was created  
 - 💾 Data stored in React state (no backend needed)  
 - 🎨 Clean and minimal UI  
+- 🤖 Use Ai to get Summarize or Improve your Notes 
 
 ---
 
@@ -23,6 +24,8 @@ In this project we can understand and practice:
 - 🔹 **props** — passing data between components  
 - 🔹 **Tailwind CSS** — fast and modern styling  
 - 🔹 **GitHub Hosting** — deploying a React app online  
+- 🔹 **API Integration** — connecting Gemini AI to add smart features  
+- 🔹 **Adding AI to Web Apps** — integrating AI-powered tools into a React project  
 
 ---
 
@@ -30,6 +33,7 @@ In this project we can understand and practice:
 
 - ⚛️ **React.js** – Frontend library  
 - 💅 **Tailwind** – For styling  
+- 🤖 **Gemini Ai** - For Ai Features
 
 ---
 
@@ -47,18 +51,19 @@ In this project we can understand and practice:
    ```bash
    npm install
    ```
-4. **Run the app**
+4. **Configure your Gemini API key**
+   - Rename `.env.example` to `.env`
+   - Add your API key:
+   ```bash
+   VITE_GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+5. **Run the app**
    ```bash
    npm run dev
    ```
-5. **Open your browser and visit** <br>
+6. **Open your browser and visit** <br>
    👉 http://localhost:5173
 
----
-
-## 👨‍🎓 About
-
-Created with ❤️ by Kaushal Sahu
 
 ---
 
@@ -70,3 +75,9 @@ Linkedin: [@kaushalsahu07](www.linkedin.com/in/kaushalsahu07).<br>
 Instagram: [@cd.kaushal](https://www.instagram.com/cd.kaushal?igsh=cTVram1ia3Vvamxz).<br>
 Portfolio: [Website Link ](https://kaushalsahu07.github.io/portfolio/).<br>
 X (Tweeter): [@kaushalsahu_07](https://x.com/kaushalsahu_07?t=7nk-jApWrJkgW6YwklJZWQ&s=09).<br>
+
+---
+
+## 👨‍🎓 About
+
+Created with ❤️ by Kaushal Sahu
