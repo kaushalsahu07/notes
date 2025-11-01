@@ -34,20 +34,20 @@ function App() {
   };
 
   // For Updating Notes Function
-  const lastNotes = (id, flied, value) => {
+  const lastNotes = (id, field, value) => {
     setNotes((preNotes) =>
       preNotes.map((note) =>
-        note.id === id ? { ...note, [flied]: value } : note
+        note.id === id ? { ...note, [field]: value } : note
       )
     );
   };
 
-  // Delete Notes Funtion
+  // Delete Notes Function
   const deleteNote = (id) => {
     setNotes([...notes].filter((note) => note.id !== id));
   };
 
-  //Ai
+  //Ai Function
   async function generateAIContent(id, option) {
     // Get API Key from .env file
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -58,35 +58,40 @@ function App() {
     }
 
     try {
-      const note = notes.find((note) => note.id === id);
+      const note = [...notes].find((note) => note.id === id);
       if (!note) {
         return;
       }
 
       // Create the prompt based on the selected option
       let prompt = "";
-      if (option === "summary") {
-        prompt = `Summarize the following note content in a concise manner:\n\n${note.content}`;
-      } else if (option === "expand") {
-        prompt = `Expand upon the following note content, adding more details and depth:\n\n${note.content}`;
+      if (option === "summarize") {
+        prompt = `Summarize the following note into a few clear bullet points highlighting the main ideas:\n\n"${note.content}"`;
+      } else if (option === "improve") {
+        prompt = `improve the following note content, adding more details and depth:\n\n"${note.content}"`;
+      } else {
+        prompt = `Provide a helpful response based on the following note:\n\n"${note.content}"`;
       }
 
+      // Ai Call
       const ai = new GoogleGenAI({ apiKey });
-      
+
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        messages: [
+        model: "gemini-2.0-flash-exp",
+        contents: [
           {
             role: "user",
-            content: prompt,
+            parts: [{ text: prompt }],
           },
         ],
       });
 
-      // Update the note with AI response
-      lastNotes(id, "content", response.text);
+      // Get the AI-generated text and return it
+      const aiText = response.text || "No content generated";
+      return aiText;
     } catch (error) {
       console.error("Error generating AI content:", error);
+      throw error;
     }
   }
   return (
