@@ -55,6 +55,7 @@ function App() {
       console.error(
         "API Key is missing! Make sure .env file is in the root directory and server is restarted."
       );
+      return "API Key is missing. Please add your Gemini API key.";
     }
 
     try {

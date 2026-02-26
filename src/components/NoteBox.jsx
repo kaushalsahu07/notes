@@ -66,7 +66,7 @@ export default function NoteBox({
 
   return (
     <>
-      <div className="w-4xs h-80 bg-white border-gray-200  border-2 rounded-lg shadow-md hover:shadow-lg hover:border-blue-500 transition-shadow duration-300">
+      <div className="w-full h-80 bg-white border-gray-200  border-2 rounded-lg shadow-md hover:shadow-lg hover:border-blue-500 transition-shadow duration-300">
         <div className="p-5">
           <input
             value={title}
