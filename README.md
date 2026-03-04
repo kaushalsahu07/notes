@@ -1,4 +1,4 @@
-# 📝 Notes App
+# 📝 Skictynote App
 
 A simple and lightweight **AI React.js Notes App** that lets you create, view, edit, and delete notes — built for learning and fun!
 
