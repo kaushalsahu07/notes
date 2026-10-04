@@ -11,7 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^1.28.0",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.15",
     "react": "^19.1.1",
