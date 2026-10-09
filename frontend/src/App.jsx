@@ -3,6 +3,7 @@ import "./App.css";
 import Nav from "./components/Nav.jsx";
 import NoteBox from "./components/NoteBox.jsx";
 import { GoogleGenAI } from "@google/genai";
+import { getToday } from "./utils/date.ts";
 
 function App() {
   const [notes, setNotes] = useState(() => {
@@ -15,20 +16,13 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
-  // Date Function
-  const today = new Date().toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-
   // Add notes function when the plus button is clicked
   const addNotes = () => {
     const newNote = {
       id: Date.now(),
       title: "",
       content: "",
-      onCreate: today,
+      onCreate: getToday(),
     };
     setNotes([...notes, newNote]);
   };
