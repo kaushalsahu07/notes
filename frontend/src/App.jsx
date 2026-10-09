@@ -3,7 +3,7 @@ import "./App.css";
 import Nav from "./components/Nav.jsx";
 import NoteBox from "./components/NoteBox.jsx";
 import { GoogleGenAI } from "@google/genai";
-import { getToday } from "./utils/date.ts";
+import { getToday } from "./utils/date.js";
 
 function App() {
   const [notes, setNotes] = useState(() => {
