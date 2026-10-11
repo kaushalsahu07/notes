@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import { env } from "./config/env.js";
 import { notfoundError, errorHandler } from "./middleware/error.handling.js";
+import { aiLimiter } from "./middleware/rateLimiter.js"
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", aiLimiter, (req, res) => {
     res.send("Server is running");
 })
 

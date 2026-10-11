@@ -1,4 +1,3 @@
-
 export function notfoundError(req, res) {
   res.status(404).send({ error: "Route not found" });
 };

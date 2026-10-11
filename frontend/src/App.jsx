@@ -57,16 +57,6 @@ function App() {
         return;
       }
 
-      // Create the prompt based on the selected option
-      let prompt = "";
-      if (option === "summarize") {
-        prompt = `Summarize the following note into a few clear bullet points highlighting the main ideas:\n\n"${note.content}"`;
-      } else if (option === "improve") {
-        prompt = `improve the following note content, adding more details and depth:\n\n"${note.content}"`;
-      } else {
-        prompt = `Provide a helpful response based on the following note:\n\n"${note.content}"`;
-      }
-
       // Ai Call
       const ai = new GoogleGenAI({ apiKey });
 
