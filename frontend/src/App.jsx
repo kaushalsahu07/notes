@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav.jsx";
 import NoteBox from "./components/NoteBox.jsx";
-import { GoogleGenAI } from "@google/genai";
 import { getToday } from "./utils/date.js";
 
 function App() {

@@ -1,83 +1,207 @@
 # 📝 Skictynote App
 
-A simple and lightweight **AI React.js Notes App** that lets you create, view, edit, and delete notes — built for learning and fun!
+Skictynote is a responsive React notes application with Gemini-powered actions
+for summarizing and improving note content.
 
----
+## ✨ Features
 
-## 🚀 Features
+- Create, edit, and delete notes
+- Persist notes in browser `localStorage`
+- Expand a note into a full-screen editor on focus
+- Responsive layout for mobile, tablet, and desktop
+- Summarize notes with Gemini
+- Improve note writing with Gemini
+- Backend rate limiting for AI requests
+- CORS-protected frontend/backend communication
 
-- ✏️ Add new notes easily  
-- 🗑️ Delete notes with a click  
-- 📅 Each note shows the date it was created  
-- 💾 Data stored in React state (no backend needed)  
-- 🎨 Clean and minimal UI  
-- 🤖 Use Ai to get Summarize or Improve your Notes 
+## 🧰 Tech stack
 
----
+### Frontend
 
-## 🧠 What We Can Learn
+- React 19
+- Vite
+- Tailwind CSS
+- Tabler Icons
 
-In this project we can understand and practice:
+### Backend
 
-- 🔹 **useState** — managing component state  
-- 🔹 **localStorage** — saving notes permanently in the browser  
-- 🔹 **props** — passing data between components  
-- 🔹 **Tailwind CSS** — fast and modern styling  
-- 🔹 **GitHub Hosting** — deploying a React app online  
-- 🔹 **API Integration** — connecting Gemini AI to add smart features  
-- 🔹 **Adding AI to Web Apps** — integrating AI-powered tools into a React project  
+- Node.js
+- Express
+- Google Gemini API
+- `express-rate-limit`
+- `cors`
 
----
+## 📁 Project structure
 
-## 🧰 Tech Stack
+```text
+notes/
+├── README.md
+├── .gitignore
+├── frontend/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   ├── public/
+│   │   └── icon.png
+│   └── src/
+│       ├── App.css
+│       ├── App.jsx
+│       ├── main.jsx
+│       ├── components/
+│       │   ├── Nav.jsx
+│       │   └── NoteBox.jsx
+│       └── utils/
+│           └── date.js
+└── backend/
+    ├── .env.example
+    ├── .gitignore
+    ├── index.js
+    ├── package.json
+    ├── package-lock.json
+    └── src/
+        ├── index.js
+        ├── config/
+        │   └── env.js
+        ├── controllers/
+        │   └── app.controllers.js
+        ├── middleware/
+        │   ├── error.handling.js
+        │   ├── rateLimiter.js
+        │   └── validateAi.js
+        ├── prompt/
+        │   └── prompt.js
+        ├── routes/
+        │   └── app.routes.js
+        ├── services/
+        │   └── gemini.services.js
+        └── utils/
+            └── appError.js
+```
 
-- ⚛️ **React.js** – Frontend library  
-- 💅 **Tailwind** – For styling  
-- 🤖 **Gemini Ai** - For Ai Features
+## 🚀 Run locally
 
----
+### 1. Clone the repository
 
-## 🏗️ How to Run Locally
+```bash
+git clone https://github.com/kaushalsahu07/notes.git
+cd notes
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/kaushalsahu07/notes.git
-   ```
-2. **Navigate to the project folder**
-   ```bash
-   cd notes
-   ```
-3. **Install dependencies**
-   ```bash
-   npm install
-   ```
-4. **Configure your Gemini API key**
-   - Rename `.env.example` to `.env`
-   - Add your API key:
-   ```bash
-   VITE_GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-5. **Run the app**
-   ```bash
-   npm run dev
-   ```
-6. **Open your browser and visit** <br>
-   👉 http://localhost:5173
+### 2. Configure the backend
 
+Create `backend/.env` from `backend/.env.example`:
 
----
+```env
+PORT=3000
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=your_gemini_model
+CLIENT_ORIGIN=http://localhost:5173
+```
 
-## 🧷 Contact
+Install backend dependencies and start the API:
 
-For any inquiries, reach out at [kaushalsahu.me@gmailcom](mailto:kaushalsahu.me@gmailcom).<br>
-GitHub: [@kaushalsahu07](https://github.com/kaushalsahu07).<br>
-Linkedin: [@kaushalsahu07](www.linkedin.com/in/kaushalsahu07).<br>
-Instagram: [@cd.kaushal](https://www.instagram.com/cd.kaushal?igsh=cTVram1ia3Vvamxz).<br>
-Portfolio: [Website Link ](https://kaushalsahu07.github.io/portfolio/).<br>
-X (Tweeter): [@kaushalsahu_07](https://x.com/kaushalsahu_07?t=7nk-jApWrJkgW6YwklJZWQ&s=09).<br>
+```bash
+cd backend
+npm install
+npm run dev
+```
 
----
+The backend runs at [http://localhost:3000](http://localhost:3000).
 
-## 👨‍🎓 About
+The health endpoint is:
 
-Created with ❤️ by Kaushal Sahu
+```text
+GET http://localhost:3000/
+```
+
+### 3. Configure the frontend
+
+Open a second terminal from the repository root and create
+`frontend/.env` from `frontend/.env.example`:
+
+```env
+VITE_CLIENT_ORIGIN=http://localhost:3000
+```
+
+Install frontend dependencies and start Vite:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+Restart the Vite server whenever a frontend `.env` value changes.
+
+## 🔌 API
+
+### Generate AI content
+
+```text
+POST http://localhost:3000/app
+```
+
+Request body:
+
+```json
+{
+  "option": "summarize",
+  "content": "Your note content goes here."
+}
+```
+
+Supported options:
+
+- `summarize`
+- `improve`
+
+Successful response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "text": "Generated Gemini response"
+  }
+}
+```
+
+The endpoint allows up to 10 requests per IP address per minute. Invalid
+content returns a `400` response, and rate-limited clients receive a `429`
+response.
+
+## 🧪 Useful commands
+
+Run these commands from the relevant application directory:
+
+```bash
+# Frontend
+npm run dev
+npm run build
+npm run lint
+
+# Backend
+npm run dev
+npm start
+```
+
+## 💾 Note storage
+
+Notes are currently stored in the browser's `localStorage` under the key
+`notes`. The backend does not store note records; it only processes AI
+requests.
+
+## 👨‍💻 Contact
+
+- GitHub: [@kaushalsahu07](https://github.com/kaushalsahu07)
+- Portfolio: [kaushalsahu07.github.io/portfolio](https://kaushalsahu07.github.io/portfolio/)
+- LinkedIn: [@kaushalsahu07](https://www.linkedin.com/in/sahukaushal/)
+- Instagram: [@cd.kaushal](https://www.instagram.com/cd.kaushal/)
+
+Created with ❤️ by Kaushal Sahu.
