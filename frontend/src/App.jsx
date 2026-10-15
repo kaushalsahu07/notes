@@ -42,37 +42,27 @@ function App() {
   };
 
   //Ai Function
-  async function generateAIContent(id, option) {
-    // Get API Key from .env file
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!apiKey) {
-      console.error(
-        "API Key is missing! Make sure .env file is in the root directory and server is restarted."
-      );
-    }
-
+  async function generateAIContent(id, option, content) {
     try {
       const note = [...notes].find((note) => note.id === id);
       if (!note) {
-        return;
+        throw new Error("Note not found");
       }
 
-      // Ai Call
-      const ai = new GoogleGenAI({ apiKey });
-
-      const response = await ai.models.generateContent({
-        model: "gemini-3.5-flash",
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: prompt }],
-          },
-        ],
+      const response = await fetch(`${import.meta.env.VITE_CLIENT_ORIGIN}/app`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ option, content }),
       });
 
-      // Get the AI-generated text and return it
-      const aiText = response.text || "No content generated";
-      return aiText;
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Unable to generate AI content");
+      }
+
+      return result.data.text;
     } catch (error) {
       console.error("Error generating AI content:", error);
       throw error;

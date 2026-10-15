@@ -2,7 +2,7 @@ import { validOptions } from "../prompt/prompt.js";
 import { AppError } from "../utils/appError.js";
 
 export function validateAi(req, res, next) {
-  const { option, content } = res.body;
+  const { option, content } = req.body;
   if (!validOptions.includes(option)) {
     return next(new AppError("Invalid option", 400));
   }
