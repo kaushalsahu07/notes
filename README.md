@@ -200,7 +200,7 @@ requests.
 ## 👨‍💻 Contact
 
 - GitHub: [@kaushalsahu07](https://github.com/kaushalsahu07)
-- Portfolio: [kaushalsahu07.github.io/portfolio](https://kaushalsahu07.github.io/portfolio/)
+- Portfolio: [kaushalsahu.tech](https://kaushalsahu.tech)
 - LinkedIn: [@kaushalsahu07](https://www.linkedin.com/in/sahukaushal/)
 - Instagram: [@cd.kaushal](https://www.instagram.com/cd.kaushal/)
 
