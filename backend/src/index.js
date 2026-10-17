@@ -17,6 +17,10 @@ app.use("/app", appRouters);
 app.use(notfoundError);
 app.use(errorHandler);
 
-app.listen(env.PORT, () => {
-    console.log(`Server is running on port ${env.PORT}`);
-});
+if (process.env.VERCEL !== "1") {
+    app.listen(env.PORT, () => {
+        console.log(`Server is running on port ${env.PORT}`);
+    });
+}
+
+export default app;

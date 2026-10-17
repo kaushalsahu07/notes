@@ -139,6 +139,31 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 Restart the Vite server whenever a frontend `.env` value changes.
 
+## ☁️ Deploy
+
+### Backend on Vercel
+
+Create a Vercel project with the repository `backend/` directory as its
+**Root Directory**. The included `backend/vercel.json` configures the Express
+API as a Vercel function. Set these environment variables in Vercel:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=your_gemini_model
+CLIENT_ORIGIN=https://your-netlify-site.netlify.app
+```
+
+### Frontend on Netlify
+
+Create a Netlify project with the repository `frontend/` directory as its
+**Base directory**. The included `frontend/netlify.toml` builds and publishes
+the Vite output and enables SPA routing. Set this environment variable in
+Netlify to the deployed Vercel API origin:
+
+```env
+VITE_CLIENT_ORIGIN=https://your-vercel-api.vercel.app
+```
+
 ## 🔌 API
 
 ### Generate AI content
